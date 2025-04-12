@@ -18,7 +18,7 @@ export async function POST(request: NextRequest) {
         
         await sendEmail({email,emailType:"RESET",userId:user._id})
         return NextResponse.json({message:'forgotpassword email sent',success:true})
-    } catch (error) {
+    } catch (error:any) {
         console.log(error);
 
     }
