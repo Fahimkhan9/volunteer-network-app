@@ -1,5 +1,6 @@
 import { connectDB } from "@/dbConfig/dbConfig";
 import { User } from "@/models/userModel";
+import bcrypt from "bcryptjs";
 import { NextRequest, NextResponse } from "next/server";
 
 connectDB()
@@ -20,8 +21,10 @@ export async function POST(request: NextRequest) {
         if (!user) {
             return NextResponse.json({ msg: "Invalid credentials" })
         }
+        const salt = await bcrypt.genSalt(10)
+                const hashedPassword = await bcrypt.hash(password, salt)
         await User.findByIdAndUpdate(user._id, {
-            password,
+            password:hashedPassword,
             forgotPasswordToken:undefined,
             forgotPasswordExpiry:undefined
         })
