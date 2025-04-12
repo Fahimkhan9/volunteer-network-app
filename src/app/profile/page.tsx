@@ -7,7 +7,10 @@ import { useEffect, useState } from "react";
 
 function ProfilePage() {
   const router=useRouter()
-  const [userData,setUserData]=useState(null)
+  const [userData,setUserData]=useState({
+    email:'',
+    username:''
+  })
   const handlelogout=async ()=>{
     try {
       const res =await axios.get('/api/users/logout')
@@ -30,7 +33,7 @@ function ProfilePage() {
  
   return (
     <div>
-      {userData && <h2>{userData.email}</h2>}
+      {userData && <h2>{userData?.email}</h2>}
       {/* <button  onClick={handleLoad}>Load User Data</button> */}
       <button onClick={handlelogout}>Logout</button>
     </div>
