@@ -20,8 +20,8 @@ export const sendEmail=async ({email,emailType,userId}:any)=>{
         host: "sandbox.smtp.mailtrap.io",
         port: 2525,
         auth: {
-          user: "25293f2d9c8856",
-          pass: "8a3cceb6588ef6"
+          user: process.env.NODEMAILER_USER,
+          pass: process.env.NODEMAILER_PASS
         }
       });
       const htmlink=emailType ==='VERIFY' ? `${process.env.DOMAIN}/verifyemail?token=${hashedToken}`:`${process.env.DOMAIN}/forgotpassword/tokenverify?token=${hashedToken}`
