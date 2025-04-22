@@ -18,12 +18,17 @@ import {
   Stack,
 } from '@chakra-ui/react'
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons'
+import { useContext } from 'react'
+import { UserContext } from '@/context/context'
+import { useRouter } from 'next/navigation'
+import axios from 'axios'
+import Link from 'next/link'
 
 interface Props {
   children: React.ReactNode
 }
 
-const Links = ['Dashboard', 'Projects', 'Team']
+const Links = ['', 'Projects', 'Team']
 
 const NavLink = (props: Props) => {
   const { children } = props
@@ -46,7 +51,19 @@ const NavLink = (props: Props) => {
 
 export default function Navbar() {
   const { isOpen, onOpen, onClose } = useDisclosure()
-
+  const {user,setUser}=useContext(UserContext)
+  console.log(user);
+  const router=useRouter()
+  const handlelogout=async ()=>{
+    try {
+      const res =await axios.get('/api/users/logout')
+      setUser([])
+      router.push('/login')
+    } catch (error) {
+      console.log(error);
+      
+    }
+  }
   return (
     <>
       <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4}>
@@ -61,19 +78,29 @@ export default function Navbar() {
           <HStack spacing={8} alignItems={'center'}>
             <Box>Logo</Box>
             <HStack as={'nav'} spacing={4} display={{ base: 'none', md: 'flex' }}>
-              {Links.map((link) => (
-                <NavLink key={link}>{link}</NavLink>
-              ))}
+              
+              {/* <NavLink> */}
+                <Link href='/events'>Events</Link>
+                {
+                  user?._id && (
+                    <>
+                    <Link href='/create'>Create</Link>
+                    </>
+                  )
+                }
+              {/* </NavLink> */}
             </HStack>
           </HStack>
           <Flex alignItems={'center'}>
-            <Menu>
+            {
+              user?._id ? <Menu>
               <MenuButton
                 as={Button}
                 rounded={'full'}
                 variant={'link'}
                 cursor={'pointer'}
-                minW={0}>
+                minW={0}
+                >
                 <Avatar
                   size={'sm'}
                   src={
@@ -82,21 +109,35 @@ export default function Navbar() {
                 />
               </MenuButton>
               <MenuList>
-                <MenuItem>Link 1</MenuItem>
+            
+                <MenuItem>{user.email}</MenuItem>
                 <MenuItem>Link 2</MenuItem>
                 <MenuDivider />
-                <MenuItem>Link 3</MenuItem>
+                <MenuItem>
+                <Button onClick={()=>handlelogout()}>Logout</Button>
+                </MenuItem>
+                
+               
+                
+                
+              
               </MenuList>
             </Menu>
+            :
+            <Flex alignItems={'center'}>
+              <Button>
+
+                <Link href='/login'>Login</Link>
+              </Button>
+              </Flex>
+            }
           </Flex>
         </Flex>
 
         {isOpen ? (
           <Box pb={4} display={{ md: 'none' }}>
             <Stack as={'nav'} spacing={4}>
-              {Links.map((link) => (
-                <NavLink key={link}>{link}</NavLink>
-              ))}
+            <NavLink key={'events'}>Events</NavLink>
             </Stack>
           </Box>
         ) : null}

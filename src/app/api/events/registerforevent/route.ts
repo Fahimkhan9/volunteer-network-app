@@ -21,14 +21,17 @@ export async function POST(req:NextRequest){
                 }
             }
         },{new:true})
+        // this show to the participants how many events they have registered for
         await User.findByIdAndUpdate(userId,{
             $push:{
+               event:{
                 id:findevent._id,
                 name:findevent.name,
                 description:findevent.description,
                 location:findevent.location,
                 date:findevent.date,
                 time:findevent.time
+               }
             }
         },{new:true})
         return NextResponse.json({data:findevent})

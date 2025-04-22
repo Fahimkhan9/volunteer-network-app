@@ -31,7 +31,7 @@ function EventCard({data,user}) {
       
     }
   }
-  console.log(user._id,'user');
+  console.log(user?._id,'user');
   
   return (
     <Flex p={50} w="full" alignItems="center" justifyContent="center">
