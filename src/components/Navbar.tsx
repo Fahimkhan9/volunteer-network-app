@@ -122,7 +122,9 @@ export default function Navbar() {
               <MenuList>
             
                 <MenuItem>{user.email}</MenuItem>
-                <MenuItem>Link 2</MenuItem>
+                <MenuItem>
+                <Link href='/profile' >Profile</Link>
+                </MenuItem>
                 <MenuDivider />
                 <MenuItem>
                 <Button onClick={()=>handlelogout()}>Logout</Button>

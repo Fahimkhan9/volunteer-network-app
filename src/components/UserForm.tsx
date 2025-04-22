@@ -40,7 +40,8 @@ export default function UserForm({islogin}) {
             }
          const res=await axios.post('/api/users/login',user)
          console.log(res.data);
-         
+         const getuser=await axios.get('/api/users/me')
+         setUser(getuser.data.data)
          router.push('/profile')
          
          
