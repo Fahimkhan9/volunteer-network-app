@@ -30,7 +30,7 @@ export default function RootLayout({
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
     
       <Providers>
-      <Container maxW='8xl'>
+      <Container maxW='7xl'>
       <Navbar/>
      {children}
      <Footer/>

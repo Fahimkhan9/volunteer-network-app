@@ -23,7 +23,8 @@ import { UserContext } from '@/context/context'
 import { useRouter } from 'next/navigation'
 import axios from 'axios'
 import Link from 'next/link'
-
+import Image from 'next/image'
+import logo from '@/helpers/logo.png'
 interface Props {
   children: React.ReactNode
 }
@@ -76,7 +77,17 @@ export default function Navbar() {
             onClick={isOpen ? onClose : onOpen}
           />
           <HStack spacing={8} alignItems={'center'}>
-            <Box>Logo</Box>
+            <Box>
+              <Link href='/'>
+              <Image
+      src={logo}
+      width={100}
+      height={100}
+      alt="app logo"
+    />
+              </Link>
+           
+              </Box>
             <HStack as={'nav'} spacing={4} display={{ base: 'none', md: 'flex' }}>
               
               {/* <NavLink> */}

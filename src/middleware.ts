@@ -2,34 +2,30 @@ import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
  
 // This function can be marked `async` if using `await` inside
+const protectedRoutes = ['/profile','/create']
+const publicRoutes = ['/login', '/signup','/events','/forgotpassword','/forgotpassword/tokenverify']
 export function middleware(request: NextRequest) {
-  const path=request.nextUrl.pathname
-  const isPublicPath=path === '/login' || path === '/signup' || path ==='/verifyemail' || path === '/'
+  const path = request.nextUrl.pathname
+  const isProtectedRoute = protectedRoutes.includes(path)
+  const isPublicRoute = publicRoutes.includes(path)
   const token=request.cookies.get('token')?.value || ''
   
-  
-//   redirect the authenticated user
-    if(isPublicPath && token){
-        return NextResponse.redirect(new URL('/',request.nextUrl))
-    }
-    if(!isPublicPath && !token){
-      
-      console.log('protected');
-      console.log(isPublicPath);
-      console.log(token);
-      
-      
-        return NextResponse.redirect(new URL('/login',request.nextUrl))
-    }
+  if (isProtectedRoute && !token) {
+    return NextResponse.redirect(new URL('/login', request.nextUrl))
+  }
+  if (
+    isPublicRoute &&
+    token &&
+    !request.nextUrl.pathname.startsWith('/events')
+  ) {
+    return NextResponse.redirect(new URL('/profile', request.nextUrl))
+  }
+   
 }
  
 // See "Matching Paths" below to learn more
 export const config = {
   matcher: [
-    '/',
-    '/profile',
-    '/login',
-    '/signup',
-    '/verifyemail'
+   '/((?!api|_next/static|_next/image|.*\\.png$).*)'
   ],
 }

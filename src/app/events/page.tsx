@@ -1,6 +1,6 @@
 'use client'
 import EventCard from '@/components/EventCard'
-import { Box, SimpleGrid, Spinner } from '@chakra-ui/react'
+import { Box, Center, SimpleGrid, Spinner } from '@chakra-ui/react'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 
@@ -33,9 +33,15 @@ function Events() {
     
   return (
     <>
+    <Center>
     {
         isloading && <Spinner/>
     }
+    <form >
+        
+    </form>
+    </Center>
+   
     <Box p={4}>
         <SimpleGrid columns={{ base: 1, md: 3 }} spacing={10}>
         {
