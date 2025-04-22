@@ -1,5 +1,6 @@
 'use client';
 
+import UserForm from "@/components/UserForm";
 import { sendEmail } from "@/helpers/mailer";
 import axios from "axios";
 import Link from "next/link";
@@ -37,22 +38,11 @@ function LoginPage() {
   }
 
   return (
-    <div>
-      <input type="text" placeholder="email" value={user.email} onChange={(e)=>setUser({...user,email:e.target.value})} />
-      <br />
-      <input type="text" placeholder="password" value={user.password} onChange={(e)=>setUser({...user,password:e.target.value})} />
-      <br />
-      <button disabled={buttondisabled} onClick={handlelogin} >Login</button>
-      <br />
-      <Link
-      href='/signup'
-      >GO to Signup</Link>
-      <br />
-      <Link
-      href='/forgotpassword'
-
-      >Forgot password</Link>
-    </div>
+    <>
+    <UserForm
+    islogin={true}
+    />
+    </>
   )
 }
 

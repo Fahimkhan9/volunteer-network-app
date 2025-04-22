@@ -1,7 +1,8 @@
 import mongoose, { Schema } from "mongoose";
 import bcrypt from "bcryptjs";
 import jwt from 'jsonwebtoken';
-const userSchema = new Schema({
+import { eventSchema } from "./eventModel";
+export const userSchema = new Schema({
     username: {
         type: String,
         required: true,
@@ -34,7 +35,18 @@ const userSchema = new Schema({
     forgotPasswordToken:String,
     forgotPasswordExpiry:Date,
     verifyToken:String,
-    verifyTokenExpiry:Date
+    verifyTokenExpiry:Date,
+    event:{
+        type:[{
+            id:String,
+            name:String,
+            description:String,
+            location:String,
+            date:String,
+            time:String,
+        }],
+        default:undefined
+    }
 
 },
     { timestamps: true })

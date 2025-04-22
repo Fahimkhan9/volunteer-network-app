@@ -1,5 +1,6 @@
 'use client';
 
+import UserForm from "@/components/UserForm";
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -33,19 +34,9 @@ function SignupPage() {
 
   }
   return (
-    <div>
-      <input type="text" placeholder="username" value={user.username} onChange={(e)=>setUser({...user,username:e.target.value})} />
-      <br />
-      <input type="text" placeholder="email" value={user.email} onChange={(e)=>setUser({...user,email:e.target.value})} />
-      <br />
-      <input type="text" placeholder="password" value={user.password} onChange={(e)=>setUser({...user,password:e.target.value})} />
-      <br />
-      <button disabled={buttondisabled} onClick={handlesignup} >Signup</button>
-      <br />
-      <Link
-      href='/login'
-      >GO to login</Link>
-    </div>
+    <>
+    <UserForm islogin={false}/>
+    </>
   )
 }
 
