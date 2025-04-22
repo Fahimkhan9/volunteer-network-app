@@ -53,7 +53,7 @@ const NavLink = (props: Props) => {
 export default function Navbar() {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const {user,setUser}=useContext(UserContext)
-  console.log(user);
+ 
   const router=useRouter()
   const handlelogout=async ()=>{
     try {
@@ -114,8 +114,9 @@ export default function Navbar() {
                 >
                 <Avatar
                   size={'sm'}
+                  name={user.username}
                   src={
-                    'https://images.unsplash.com/photo-1493666438817-866a91353ca9?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9'
+                    'https://image.unsplash.com/photo-1493666438817-866a91353ca9?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9'
                   }
                 />
               </MenuButton>

@@ -13,25 +13,70 @@ import {
   Button,
 } from '@chakra-ui/react'
 import axios from 'axios';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 
 
 
 
 function EventCard({data,user}) {
+  const [isLoading,setIsLoading]=useState(false)
+  const [error,setError]=useState('')
+  const router=useRouter()
+  console.log(data);
+  console.log(user);
+  
+  
+  const checkExistingRegistered = ()=>{
+    user.event.map(item=>{
+      if(item.id===data._id){
+        console.log(data.name);
+        
+        return true
+      }else{
+        return false
+      }
+    })
+  }
   const handleRegister=async (eventId,userId)=>{
     try {
-      console.log(eventId,userId);
+
+      setIsLoading(true)
       const data={
         eventId,userId
       }
       const res=await axios.post('/api/events/registerforevent',data)
-      console.log(res.data);
-      
+      setIsLoading(false)
+      router.push('/profile')
     } catch (error) {
-      
+      setError(error)
     }
   }
-  console.log(user?._id,'user');
+  
+  const registerbutton=()=>{
+    
+    
+    if(!user?._id){
+      return <Box fontSize="2xl" color={useColorModeValue('gray.800', 'white')}>
+      Login to register for this event
+    </Box>
+    }else if(data?.ownerId == user?._id){
+      return <Box fontSize="2xl" color={useColorModeValue('gray.800', 'white')}>
+      See Profile
+    </Box>
+    }else if(checkExistingRegistered()===true){
+      return <Box fontSize="2xl" color={useColorModeValue('gray.800', 'white')}>
+      Already registered
+    </Box>
+    }
+    else{
+      return <Button
+      onClick={()=>handleRegister(data._id,user?._id)}
+      size='lg' isDisabled={isLoading} colorScheme='purple'>Register for this</Button>
+    }
+  }
+  
+  console.log(checkExistingRegistered());
   
   return (
     <Flex p={50} w="full" alignItems="center" justifyContent="center">
@@ -79,9 +124,13 @@ function EventCard({data,user}) {
               {data.time}
             </Box>
           </Flex>
-          <Button
-          onClick={()=>handleRegister(data._id,user?._id)}
-          size='lg' isDisabled={!user?._id} colorScheme='purple'>Register for this</Button>
+         {
+          checkExistingRegistered() ? <Box fontSize="2xl" color={useColorModeValue('gray.800', 'white')}>
+          Already registerd
+        </Box>:registerbutton()
+        }
+          
+          
         </Box>
         
       </Box>

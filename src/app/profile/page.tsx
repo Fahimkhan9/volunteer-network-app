@@ -51,8 +51,7 @@ function ProfilePage() {
     }
     handleLoad()
   },[])
-// console.log('created',eventsCreatedByMe);
-console.log('parti',eventsParticipated);
+
 
 
  
