@@ -9,7 +9,8 @@ import { Box, Flex, Text,  Table,
     Th,
     Td,
     TableCaption,
-    TableContainer, } from '@chakra-ui/react'
+    TableContainer,
+    Center, } from '@chakra-ui/react'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 
@@ -38,8 +39,9 @@ function EventCreatedDetails({params}:any) {
         <Box>
             <ProfileSidebar/>
         </Box>
-        <Box p={4}>
-        <TableContainer>
+        <Box p={10}>
+      <Center>
+      <TableContainer>
   <Table variant='striped' colorScheme='purple'>
     <TableCaption>All registered persons</TableCaption>
     <Thead>
@@ -65,6 +67,7 @@ function EventCreatedDetails({params}:any) {
    
   </Table>
 </TableContainer>
+      </Center>
         </Box>
     </Flex>
     </>

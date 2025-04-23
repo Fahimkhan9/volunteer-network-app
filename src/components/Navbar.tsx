@@ -128,7 +128,7 @@ export default function Navbar() {
                 </MenuItem>
                 <MenuDivider />
                 <MenuItem>
-                <Button onClick={()=>handlelogout()}>Logout</Button>
+                <Button colorScheme='red' onClick={()=>handlelogout()}>Logout</Button>
                 </MenuItem>
                 
                

@@ -1,21 +1,19 @@
 'use client'
 
 import {
-  Flex,
-  Circle,
   Box,
-  Image,
-  Badge,
+  Center,
+  Heading,
+  Text,
+  Stack,
+  Avatar,
   useColorModeValue,
-  Icon,
-  chakra,
-  Tooltip,
-  Button,
 } from '@chakra-ui/react'
+import Image from 'next/image'
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-
+import img from '@/helpers/heroimg.jpg'
 
 
 
@@ -76,65 +74,75 @@ function EventCard({data,user}) {
     }
   }
   
-  console.log(checkExistingRegistered());
+  
   
   return (
-    <Flex p={50} w="full" alignItems="center" justifyContent="center">
+    <Center py={6}>
       <Box
-        bg={useColorModeValue('white', 'gray.800')}
-        maxW="sm"
-        borderWidth="1px"
-        rounded="lg"
-        shadow="lg"
-        position="relative">
-       
-
-        <Image src='https://images.unsplash.com/photo-1572635196237-14b3f281503f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=4600&q=80' alt={`Picture of ${data.name}`} roundedTop="lg" />
-
-        <Box p="6">
-          
-          <Flex mt="1" justifyContent="space-between" alignContent="center">
-            <Box
-              fontSize="2xl"
-              fontWeight="semibold"
-              as="h4"
-              lineHeight="tight"
-              isTruncated>
-              {data.name} 
-            </Box>
-           
-          </Flex>
-
-          
-            
-            <Box fontSize="2xl" color={useColorModeValue('gray.800', 'white')}>
-              {data.description}
-            </Box>
-           
-          
-          <Box fontSize="2xl" color={useColorModeValue('gray.800', 'white')}>
-              {data.location}
-            </Box>
-          <Flex justifyContent="space-between" alignContent="center">
-            
-            <Box fontSize="2xl" color={useColorModeValue('gray.800', 'white')}>
-              {data.date}
-            </Box>
-            <Box fontSize="2xl" color={useColorModeValue('gray.800', 'white')}>
-              {data.time}
-            </Box>
-          </Flex>
-         {
-          checkExistingRegistered() ? <Box fontSize="2xl" color={useColorModeValue('gray.800', 'white')}>
-          Already registerd
-        </Box>:registerbutton()
-        }
-          
-          
+        maxW={'445px'}
+        w={'full'}
+        // eslint-disable-next-line react-hooks/rules-of-hooks
+        bg={useColorModeValue('white', 'gray.900')}
+        boxShadow={'2xl'}
+        rounded={'md'}
+        p={6}
+        overflow={'hidden'}>
+        <Box h={'210px'} bg={'gray.100'} mt={-6} mx={-6} mb={6} pos={'relative'}>
+          <Image
+            src={img}
+            width={200}
+            height={200}
+            alt="Example"
+          />
         </Box>
-        
+        <Stack>
+         
+          <Heading
+            // eslint-disable-next-line react-hooks/rules-of-hooks
+            color={useColorModeValue('gray.700', 'white')}
+            fontSize={'2xl'}
+            fontFamily={'body'}>
+            {data.name}
+          </Heading>
+          <Text color={'gray.500'}>
+            {data.description}
+          </Text>
+          <Text
+            
+            fontWeight={800}
+            // fontSize={'sm'}
+            // letterSpacing={1.1}
+            >
+            Location:{data.location}
+          </Text>
+          <Text
+            
+            fontWeight={800}
+            // fontSize={'sm'}
+            // letterSpacing={1.1}
+            >
+            Date & time:{data.date} {data.time}
+          </Text>
+        </Stack>
+        <Text
+            color={'green.500'}
+            textTransform={'uppercase'}
+            fontWeight={800}
+            fontSize={'sm'}
+            letterSpacing={1.1}>
+            Event Organizer
+          </Text>
+        <Stack mt={6} direction={'row'} spacing={4} align={'center'}>
+          <Avatar name={user.username} 
+          src={'https://avatars0.githubusercontent.com/u/1164541?v=4'} 
+          />
+          <Stack direction={'column'} spacing={0} fontSize={'sm'}>
+            <Text fontWeight={600}>{user.email}</Text>
+            <Text color={'gray.500'}>Feb 08, 2021 · 6min read</Text>
+          </Stack>
+        </Stack>
       </Box>
-    </Flex>
+    </Center>
   )
 }
 
