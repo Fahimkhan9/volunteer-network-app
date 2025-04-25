@@ -34,6 +34,7 @@ export default function EventForm() {
     }
     const onSubmit = async (values) => {
         try {
+            // console.log(values)
             const user=await getuser()
             const data={
                 title:values.title,
@@ -42,13 +43,25 @@ export default function EventForm() {
                 date:values.date,
                 time:values.time,
                 ownerId:user._id,
+                owneremail:user.email
+                // image:values.image
             }
+            // const formData=new FormData()
+            // formData.append('title',values.title)
+            // formData.append('description',values.description)
+            // formData.append('location',values.location)
+            // formData.append('date',values.date)
+            // formData.append('time',values.time)
+            // formData.append('image',values.image)
+
+
             console.log(data);
             const res=await axios.post('/api/events/create',data)
             console.log(res);
             router.push('/events')
             
         } catch (error) {
+            console.log(error);
             
         }
 
@@ -108,6 +121,7 @@ export default function EventForm() {
                                     {errors.location && errors.location.message}
                                 </FormErrorMessage>
                             </FormControl>
+                            
                             <FormControl isInvalid={errors.date}>
                                 <FormLabel htmlFor='date'>Date</FormLabel>
                                 <Input type="date"
@@ -132,6 +146,19 @@ export default function EventForm() {
                                     {errors.time && errors.time.message}
                                 </FormErrorMessage>
                             </FormControl>
+                            {/* <FormControl isInvalid={errors.image} >
+                                <FormLabel htmlFor='image'>Event Thumbnail Image</FormLabel>
+                                <Input type="file"
+                                    {...register('image', {
+                                        required: 'This is required',
+
+                                    })}
+                                    accept="image/png, image/jpeg"
+                                />
+                                <FormErrorMessage>
+                                    {errors.image && errors.image.message}
+                                </FormErrorMessage>
+                            </FormControl> */}
                             <Stack spacing={10}>
 
                                 <Button

@@ -1,8 +1,9 @@
 'use client';
 
 
+import ProfileCard from "@/components/ProfileCard";
 import ProfileSidebar from "@/components/ProfileSidebar";
-import { Spinner } from "@chakra-ui/react";
+import { Box, Center, Flex, Spinner } from "@chakra-ui/react";
 import axios from "axios"
 import { useRouter } from "next/navigation"
 
@@ -55,7 +56,17 @@ function ProfilePage() {
   // )
   return (
     <>
-    <ProfileSidebar/>
+    <Flex>
+      <Box>
+        <ProfileSidebar/>
+      </Box>
+      <Box 
+      // width={'full'} display={'flex'} alignItems={'center'} justifyContent={'center'} 
+      p={4}>
+<ProfileCard/>
+
+      </Box>
+    </Flex>
     </>
   )
 }

@@ -14,11 +14,12 @@ import {
   Text,
   useColorModeValue,
   FormErrorMessage,
+  useToast,
 } from '@chakra-ui/react'
 import axios from "axios";
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 
 import { useForm, SubmitHandler } from "react-hook-form"
 export default function UserForm({islogin}) {
@@ -28,7 +29,9 @@ export default function UserForm({islogin}) {
         watch,
         formState: { errors,isSubmitting },
       } = useForm()
+      const toast=useToast()
       const router=useRouter()
+      const [err,setErr]=useState('')
       const {user,setUser}=useContext(UserContext)
      
       
@@ -46,8 +49,15 @@ export default function UserForm({islogin}) {
          
          
         } catch (error) {
-          console.log(error);
-          
+          console.log(error.response.data);
+          setErr(error.response.data)
+          toast({
+            title: 'Error occured',
+            description: `${error.response.data.msg}`,
+            status: 'error',
+            duration: 9000,
+            isClosable: true,
+          })
         }
     
       }
@@ -63,8 +73,16 @@ export default function UserForm({islogin}) {
            router.push('/login')
            
           } catch (error) {
-            console.log(error);
             
+            console.log(error.response.data);
+          setErr(error.response.data)
+          toast({
+            title: 'Error occured',
+            description: `${error.response.data.msg}`,
+            status: 'error',
+            duration: 9000,
+            isClosable: true,
+          })
           }
       
         }

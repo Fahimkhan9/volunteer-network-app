@@ -31,7 +31,7 @@ function Events() {
     },[])
   
    
-    
+    console.log(events)
   return (
     <>
     <Center>

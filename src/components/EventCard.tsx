@@ -8,6 +8,7 @@ import {
   Stack,
   Avatar,
   useColorModeValue,
+  Button,
 } from '@chakra-ui/react'
 import Image from 'next/image'
 import axios from 'axios';
@@ -25,17 +26,20 @@ function EventCard({data,user}) {
   console.log(user);
   
   
-  const checkExistingRegistered = ()=>{
-    user.event.map(item=>{
-      if(item.id===data._id){
-        console.log(data.name);
-        
-        return true
-      }else{
-        return false
+  const checkExistingRegistered = () => {
+    if (data?.participants?.length > 0) {
+      for (let item of data.participants) { // Use a for...of loop for better control
+        if (item.id === user._id) {
+          return true; // Return true as soon as a match is found
+        }
       }
-    })
-  }
+      // If the loop finishes without finding a match, return false
+      return false;
+    }
+    // If there are no participants, return false
+    return false;
+  };
+  
   const handleRegister=async (eventId,userId)=>{
     try {
 
@@ -45,14 +49,15 @@ function EventCard({data,user}) {
       }
       const res=await axios.post('/api/events/registerforevent',data)
       setIsLoading(false)
-      router.push('/profile')
+      router.push('/profile/registered')
     } catch (error) {
       setError(error)
     }
   }
   
   const registerbutton=()=>{
-    
+    let isregistered=checkExistingRegistered()
+    console.log(isregistered);
     
     if(!user?._id){
       return <Box fontSize="2xl" color={useColorModeValue('gray.800', 'white')}>
@@ -62,9 +67,9 @@ function EventCard({data,user}) {
       return <Box fontSize="2xl" color={useColorModeValue('gray.800', 'white')}>
       See Profile
     </Box>
-    }else if(checkExistingRegistered()===true){
+    }else if(isregistered){
       return <Box fontSize="2xl" color={useColorModeValue('gray.800', 'white')}>
-      Already registered
+    Already registered
     </Box>
     }
     else{
@@ -74,6 +79,7 @@ function EventCard({data,user}) {
     }
   }
   
+
   
   
   return (
@@ -133,14 +139,16 @@ function EventCard({data,user}) {
             Event Organizer
           </Text>
         <Stack mt={6} direction={'row'} spacing={4} align={'center'}>
-          <Avatar name={user.username} 
+          {/* <Avatar name={user.username} 
           src={'https://avatars0.githubusercontent.com/u/1164541?v=4'} 
-          />
+          /> */}
           <Stack direction={'column'} spacing={0} fontSize={'sm'}>
-            <Text fontWeight={600}>{user.email}</Text>
+            <Text fontWeight={600}>{data.owneremail}</Text>
             <Text color={'gray.500'}>Feb 08, 2021 · 6min read</Text>
           </Stack>
         </Stack>
+      {registerbutton()}
+      
       </Box>
     </Center>
   )

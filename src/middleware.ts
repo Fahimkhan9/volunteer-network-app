@@ -2,8 +2,8 @@ import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
  
 // This function can be marked `async` if using `await` inside
-const protectedRoutes = ['/profile','/create']
-const publicRoutes = ['/login', '/signup','/events','/forgotpassword','/forgotpassword/tokenverify']
+const protectedRoutes = ['/profile','/create','/events']
+const publicRoutes = ['/login', '/signup','/forgotpassword','/forgotpassword/tokenverify']
 export function middleware(request: NextRequest) {
   const path = request.nextUrl.pathname
   const isProtectedRoute = protectedRoutes.includes(path)
@@ -15,9 +15,7 @@ export function middleware(request: NextRequest) {
   }
   if (
     isPublicRoute &&
-    token &&
-    !request.nextUrl.pathname.startsWith('/events')
-  ) {
+    token) {
     return NextResponse.redirect(new URL('/profile', request.nextUrl))
   }
    

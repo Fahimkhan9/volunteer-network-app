@@ -33,6 +33,14 @@ export const eventSchema= new Schema({
         type:String,
         required:true
     },
+    image:{
+        type:String,
+        required:true
+    },
+    owneremail:{
+        type:String,
+        required:true
+    },
     participants:{
         type:[{
             id:String,

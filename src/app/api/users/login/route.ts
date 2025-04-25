@@ -20,7 +20,7 @@ export async function POST(request: NextRequest) {
         }
         const validPassword = await bcrypt.compare(password, user.password)
         if(!validPassword){
-            return NextResponse.json({error: "Invalid password"}, {status: 400})
+            return NextResponse.json({msg: "Invalid password"}, {status: 400})
         }
         console.log(user);
         
@@ -43,6 +43,6 @@ export async function POST(request: NextRequest) {
         })
         return response;
     } catch (error:any) {
-        return NextResponse.json({ error: error.message }, { status: 500 })
+        return NextResponse.json({ msg: error.message }, { status: 500 })
     }
 }
