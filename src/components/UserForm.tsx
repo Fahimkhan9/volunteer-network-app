@@ -94,6 +94,8 @@ export default function UserForm({islogin}) {
         }
 
       }
+      console.log(isSubmitting);
+      
   return (
     <Flex
       minH={'100vh'}

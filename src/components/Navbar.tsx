@@ -57,7 +57,7 @@ export default function Navbar() {
   const router=useRouter()
   const handlelogout=async ()=>{
     try {
-      const res =await axios.get('/api/users/logout')
+      await axios.get('/api/users/logout')
       setUser([])
       router.push('/login')
     } catch (error) {

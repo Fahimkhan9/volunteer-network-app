@@ -1,6 +1,6 @@
 'use client'
 
-import React, { ReactNode } from 'react'
+import React from 'react'
 import {
   IconButton,
   Box,
@@ -17,21 +17,18 @@ import {
 } from '@chakra-ui/react'
 import {
   FiHome,
-  FiTrendingUp,
-  FiCompass,
-  FiStar,
-  FiSettings,
   FiMenu,
   FiPlusCircle,
   FiUserPlus
 } from 'react-icons/fi'
 import { IconType } from 'react-icons'
-import { ReactText } from 'react'
+
 import Link from 'next/link'
 
 interface LinkItemProps {
   name: string
-  icon: IconType
+  icon: IconType,
+  href:string
 }
 const LinkItems: Array<LinkItemProps> = [
   { name: 'Home', icon: FiHome,href:'/profile' },
