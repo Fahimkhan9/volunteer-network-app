@@ -37,6 +37,12 @@ export async function POST(req: NextRequest) {
         //     ownerId,owneremail,image].some(i => i.trim() === '')) {
         //     return NextResponse.json({ msg: "All fields are required" })
         // }
+        if (!image) {
+            throw new Error("Image is required");
+        }
+        if (!(image instanceof File)) {
+            throw new Error("Invalid image file");
+        }
         const buffer = Buffer.from(await image.arrayBuffer());
         const filename = Date.now() + image.name.replaceAll(" ", "_");
         // console.log(filename);
