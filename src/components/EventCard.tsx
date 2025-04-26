@@ -28,8 +28,8 @@ function EventCard({data,user}) {
   
   const checkExistingRegistered = () => {
     if (data?.participants?.length > 0) {
-      for (let item of data.participants) { // Use a for...of loop for better control
-        if (item.id === user._id) {
+      for (let item of data?.participants) { // Use a for...of loop for better control
+        if (item?.id === user?._id) {
           return true; // Return true as soon as a match is found
         }
       }
@@ -68,8 +68,8 @@ function EventCard({data,user}) {
       See Profile
     </Box>
     }else if(isregistered){
-      return <Box fontSize="2xl" color={useColorModeValue('gray.800', 'white')}>
-    Already registered
+      return <Box fontSize="2xl"  color={useColorModeValue('gray.800', 'white')}>
+    Already registered.
     </Box>
     }
     else{
@@ -95,10 +95,10 @@ function EventCard({data,user}) {
         overflow={'hidden'}>
         <Box h={'210px'} bg={'gray.100'} mt={-6} mx={-6} mb={6} pos={'relative'}>
           <Image
-            src={img}
+            src={data.image}
             width={200}
             height={200}
-            alt="Example"
+            alt="event image"
           />
         </Box>
         <Stack>
@@ -130,7 +130,12 @@ function EventCard({data,user}) {
             Date & time:{data.date} {data.time}
           </Text>
         </Stack>
-        <Text
+        
+        <Stack mt={6} direction={'column'} spacing={4} align={'center'}>
+          {/* <Avatar name={user.username} 
+          src={'https://avatars0.githubusercontent.com/u/1164541?v=4'} 
+          /> */}
+          <Text
             color={'green.500'}
             textTransform={'uppercase'}
             fontWeight={800}
@@ -138,16 +143,15 @@ function EventCard({data,user}) {
             letterSpacing={1.1}>
             Event Organizer
           </Text>
-        <Stack mt={6} direction={'row'} spacing={4} align={'center'}>
-          {/* <Avatar name={user.username} 
-          src={'https://avatars0.githubusercontent.com/u/1164541?v=4'} 
-          /> */}
           <Stack direction={'column'} spacing={0} fontSize={'sm'}>
-            <Text fontWeight={600}>{data.owneremail}</Text>
-            <Text color={'gray.500'}>Feb 08, 2021 · 6min read</Text>
+            <Text fontWeight={600}>
+              <a href={`mailto:${data?.owneremail}`}> {data?.owneremail}</a>
+             
+              </Text>
+              {registerbutton()}
           </Stack>
         </Stack>
-      {registerbutton()}
+     
       
       </Box>
     </Center>

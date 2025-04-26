@@ -11,7 +11,8 @@ import {
 } from '@chakra-ui/react'
 import { FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa'
 import { ReactNode } from 'react'
-
+import logo from '@/helpers/logo.png'
+import Image from 'next/image'
 const Logo = (props: any) => {
   return (
     <svg height={32} viewBox="0 0 120 28" xmlns="http://www.w3.org/2000/svg" {...props}>
@@ -71,8 +72,13 @@ export default function Footer() {
         spacing={4}
         justify={{ base: 'center', md: 'space-between' }}
         align={{ base: 'center', md: 'center' }}>
-        <Logo />
-        <Text>© 2022 Chakra Templates. All rights reserved</Text>
+        <Image
+              src={logo}
+              width={100}
+              height={100}
+              alt="app logo"
+            />
+        <Text>© 2025 The Volunteer Network. All rights reserved</Text>
         <Stack direction={'row'} spacing={6}>
           <SocialButton label={'Twitter'} href={'#'}>
             <FaTwitter />

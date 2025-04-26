@@ -36,27 +36,33 @@ export default function EventForm() {
         try {
             // console.log(values)
             const user=await getuser()
-            const data={
-                title:values.title,
-                description:values.description,
-                location:values.location,
-                date:values.date,
-                time:values.time,
-                ownerId:user._id,
-                owneremail:user.email
-                // image:values.image
-            }
-            // const formData=new FormData()
-            // formData.append('title',values.title)
-            // formData.append('description',values.description)
-            // formData.append('location',values.location)
-            // formData.append('date',values.date)
-            // formData.append('time',values.time)
-            // formData.append('image',values.image)
+            
+            
+            // const data={
+            //     title:values.title,
+            //     description:values.description,
+            //     location:values.location,
+            //     date:values.date,
+            //     time:values.time,
+                // ownerId:user._id,
+                // owneremail:user.email,
+                
+            // }
+            const formData=new FormData()
+            formData.append('title',values.title)
+            formData.append('description',values.description)
+            formData.append('location',values.location)
+            formData.append('date',values.date)
+            formData.append('time',values.time)
+            formData.append('image',values.image[0])
+            formData.append('owneremail',user.email)
+            formData.append('ownerId',user._id)
 
 
-            console.log(data);
-            const res=await axios.post('/api/events/create',data)
+
+
+            // console.log(data);
+            const res=await axios.post('/api/events/create',formData)
             console.log(res);
             router.push('/events')
             
@@ -146,7 +152,7 @@ export default function EventForm() {
                                     {errors.time && errors.time.message}
                                 </FormErrorMessage>
                             </FormControl>
-                            {/* <FormControl isInvalid={errors.image} >
+                            <FormControl isInvalid={errors.image} >
                                 <FormLabel htmlFor='image'>Event Thumbnail Image</FormLabel>
                                 <Input type="file"
                                     {...register('image', {
@@ -158,7 +164,7 @@ export default function EventForm() {
                                 <FormErrorMessage>
                                     {errors.image && errors.image.message}
                                 </FormErrorMessage>
-                            </FormControl> */}
+                            </FormControl>
                             <Stack spacing={10}>
 
                                 <Button

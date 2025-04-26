@@ -103,18 +103,17 @@ export default function Testimonials() {
     <Box bg={useColorModeValue('gray.100', 'gray.700')}>
       <Container maxW={'7xl'} py={16} as={Stack} spacing={12}>
         <Stack spacing={0} align={'center'}>
-          <Heading>Our Clients Speak</Heading>
-          <Text>We have been working with clients around the world</Text>
+          <Heading>VOLUNTEERS. Speak</Heading>
+          
         </Stack>
         <Stack
           direction={{ base: 'column', md: 'row' }}
           spacing={{ base: 10, md: 4, lg: 10 }}>
           <Testimonial>
             <TestimonialContent>
-              <TestimonialHeading>Efficient Collaborating</TestimonialHeading>
+              <TestimonialHeading>Making a Difference</TestimonialHeading>
               <TestimonialText>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Auctor neque sed
-                imperdiet nibh lectus feugiat nunc sem.
+              I volunteer because I believe in making a difference. It's about contributing to something larger than myself, whether it's cleaning up a local park or supporting a cause that touches lives globally.  Seeing the positive impact, no matter how small, fuels my passion and dedication.
               </TestimonialText>
             </TestimonialContent>
             <TestimonialAvatar
@@ -127,10 +126,9 @@ export default function Testimonials() {
           </Testimonial>
           <Testimonial>
             <TestimonialContent>
-              <TestimonialHeading>Intuitive Design</TestimonialHeading>
+              <TestimonialHeading>Personal Growth</TestimonialHeading>
               <TestimonialText>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Auctor neque sed
-                imperdiet nibh lectus feugiat nunc sem.
+              Volunteering has been an incredible journey of self-discovery. Through it, I've gained new skills, met amazing people, and learned so much about my own strengths and values.  It's an investment in myself, as much as it is in the community
               </TestimonialText>
             </TestimonialContent>
             <TestimonialAvatar
@@ -143,10 +141,9 @@ export default function Testimonials() {
           </Testimonial>
           <Testimonial>
             <TestimonialContent>
-              <TestimonialHeading>Mindblowing Service</TestimonialHeading>
+              <TestimonialHeading>Community Connection</TestimonialHeading>
               <TestimonialText>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Auctor neque sed
-                imperdiet nibh lectus feugiat nunc sem.
+              Volunteering has been an incredible journey of self-discovery. Through it, I've gained new skills, met amazing people, and learned so much about my own strengths and values.  It's an investment in myself, as much as it is in the community
               </TestimonialText>
             </TestimonialContent>
             <TestimonialAvatar

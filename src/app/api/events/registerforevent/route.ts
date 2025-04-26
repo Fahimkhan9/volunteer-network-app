@@ -1,8 +1,9 @@
+import { connectDB } from "@/dbConfig/dbConfig"
 import { Event } from "@/models/eventModel"
 import { User } from "@/models/userModel"
 import { NextRequest, NextResponse } from "next/server"
 
-
+connectDB()
 export async function POST(req:NextRequest){
     try {
         const {eventId,userId}=await req.json()

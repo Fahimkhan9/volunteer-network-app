@@ -1,39 +1,85 @@
+import { connectDB } from "@/dbConfig/dbConfig";
 import { Event } from "@/models/eventModel";
 import { NextRequest, NextResponse } from "next/server";
-
-
+import { v2 as cloudinary } from 'cloudinary'
+import path from "path";
+import { writeFile } from "fs/promises";
+import fs from 'fs'
+connectDB()
 export async function POST(req: NextRequest) {
     try {
-        const {
-            title,
+        // const {
+        //     title,
+        //     description,
+        //     location,
+        //     date,
+        //     time,
+        //     ownerId,
+        //     owneremail,
+
+        // } = await req.json()
+        const formData = await req.formData()
+        const title = formData.get('title')
+        const description = formData.get('description')
+        const location = formData.get('location')
+        const time = formData.get('time')
+        const date = formData.get('date')
+        const image = formData.get('image')
+        const owneremail = formData.get('owneremail')
+        const ownerId = formData.get('ownerId')
+        // console.log(formData);
+
+        // if ([title,
+        //     description,
+        //     location,
+        //     date,
+        //     time,
+        //     ownerId,owneremail,image].some(i => i.trim() === '')) {
+        //     return NextResponse.json({ msg: "All fields are required" })
+        // }
+        const buffer = Buffer.from(await image.arrayBuffer());
+        const filename = Date.now() + image.name.replaceAll(" ", "_");
+        // console.log(filename);
+
+        const resfile = await writeFile(
+            path.join(process.cwd(), "public/uploads/" + filename),
+            buffer
+        );
+        console.log(resfile);
+        console.log('d');
+
+
+
+        cloudinary.config({
+            cloud_name: 'dswzdpmqj',
+            api_key: '178898931287881',
+            api_secret: '5yVwUUgNTjAoYk341NVY_kyG9BY'
+        });
+        // console.log(image);
+
+        const res = await cloudinary.uploader.upload(`${process.cwd()}/public/uploads/${filename}`,{transformation:[
+            {width: 350, crop: "scale"},
+            {height: 300, crop: "scale"}
+        ]})
+        console.log(res);
+
+        const event = await Event.create({
+            name: title,
             description,
             location,
             date,
             time,
             ownerId,
-            owneremail
-        } = await req.json()
-        if ([title,
-            description,
-            location,
-            date,
-            time,
-            ownerId,owneremail].some(i => i.trim() === '')) {
-            return NextResponse.json({ msg: "All fields are required" })
-        }
-        const event=await Event.create({name:title,
-            description,
-            location,
-            date,
-            time,
-            ownerId,
-            image:'https://portfolio-website-snowy.vercel.app/_next/image?url=%2Fheroimg.svg&w=1080&q=75',
+            image: res.url,
             owneremail
         })
-        
-        return NextResponse.json({msg:'event created succesfully',data:event})
-        
+        fs.unlinkSync(`${process.cwd()}/public/uploads/${filename}`)
+
+        return NextResponse.json({ msg: 'event created succesfully', data: event })
+
     } catch (error: any) {
+        console.log(error);
+
         return NextResponse.json({ error: error.message }, { status: 500 })
     }
 }
