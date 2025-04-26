@@ -58,7 +58,7 @@ export async function POST(req: NextRequest) {
         // console.log(image);
 
         const res = await cloudinary.uploader.upload(`${process.cwd()}/public/uploads/${filename}`,{transformation:[
-            {width: 350, crop: "scale"},
+            {width: 300, crop: "scale"},
             {height: 300, crop: "scale"}
         ]})
         console.log(res);

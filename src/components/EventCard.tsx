@@ -96,8 +96,8 @@ function EventCard({data,user}) {
         <Box h={'210px'} bg={'gray.100'} mt={-6} mx={-6} mb={6} pos={'relative'}>
           <Image
             src={data.image}
-            width={200}
-            height={200}
+            width={300}
+            height={300}
             alt="event image"
           />
         </Box>

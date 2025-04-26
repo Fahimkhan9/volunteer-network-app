@@ -12,8 +12,9 @@ import { Box, Flex, SimpleGrid,useColorModeValue,Table,
   TableContainer,
   Spinner,
   Center,
-  Text, } from '@chakra-ui/react'
-  import {ViewIcon}from '@chakra-ui/icons'
+  Text,
+  Button, } from '@chakra-ui/react'
+  import {DeleteIcon, ViewIcon}from '@chakra-ui/icons'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
@@ -45,6 +46,18 @@ function createdEvent() {
     }
     handleLoad()
   },[])
+  const handledeleteEvent=async  (id)=>{
+    try {
+      const data={id}
+      const res=await axios.post('/api/events/deletevent',data)
+      console.log(res);
+      let update=eventsCreatedByMe.filter(item=>item?._id!=id)
+      setEventsCreatedByMe(()=>update)
+      
+    } catch (error) {
+      
+    }
+  }
   return (
     <>
     <Flex>
@@ -62,7 +75,9 @@ function createdEvent() {
         <Th>Location</Th>
         <Th>Date</Th>
         <Th>Time</Th>
-        <Th>Action</Th>
+        <Th>See</Th>
+        <Th>Delete</Th>
+
 
 
 
@@ -82,9 +97,16 @@ function createdEvent() {
           <Td>{item?.date}</Td>
           <Td>{item?.time}</Td>
           <Td>
-            <Link href={`/profile/created/${item._id}`} >
-            <ViewIcon/>
+            <Link href={`/profile/created/${item?._id}`} >
+            <Button> <ViewIcon/></Button>
+           
             </Link>  
+            </Td>
+            <Td >
+              <Button onClick={()=>handledeleteEvent(item?._id)}>
+              <DeleteIcon/>
+              </Button>
+              
             </Td>
         </Tr>
         ))
