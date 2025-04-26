@@ -60,15 +60,15 @@ function EventCard({data,user}) {
     console.log(isregistered);
     
     if(!user?._id){
-      return <Box fontSize="2xl" color={useColorModeValue('gray.800', 'white')}>
+      return <Box fontSize="2xl" color={'gray.800'}>
       Login to register for this event
     </Box>
     }else if(data?.ownerId == user?._id){
-      return <Box fontSize="2xl" color={useColorModeValue('gray.800', 'white')}>
+      return <Box fontSize="2xl" color={'gray.800'}>
       See Profile
     </Box>
     }else if(isregistered){
-      return <Box fontSize="2xl"  color={useColorModeValue('gray.800', 'white')}>
+      return <Box fontSize="2xl"  color={'gray.800'}>
     Already registered.
     </Box>
     }

@@ -19,7 +19,7 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 
-function createdEvent() {
+function CreatedEvent() {
   const [eventsCreatedByMe,setEventsCreatedByMe]=useState([])
   const [isLoading,setIsLoading]=useState(false)
   useEffect(()=>{
@@ -125,4 +125,4 @@ function createdEvent() {
   )
 }
 
-export default createdEvent
+export default CreatedEvent
