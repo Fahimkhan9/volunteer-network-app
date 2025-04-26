@@ -177,7 +177,7 @@ export default function UserForm({islogin}) {
               </Stack>
               {
                 islogin ? <Button
-                isLoading={isSubmitting}
+                isDisabled={isSubmitting}
                 type='submit'
                 // isDisabled={isSubmitting}
                   bg={'blue.400'}
@@ -187,7 +187,7 @@ export default function UserForm({islogin}) {
                   }}>
                   Sign in
                 </Button> :  <Button
-                isLoading={isSubmitting}
+                isDisabled={isSubmitting}
                 type='submit'
                   bg={'blue.400'}
                   color={'white'}

@@ -38,9 +38,11 @@ function Events() {
     {
         isloading && <Spinner/>
     }
-   {/* <SearchEventForm
+   <SearchEventForm
    setEvents={setEvents}
-   /> */}
+   setIsloading={setIsloading}
+   isLoading={isloading}
+   />
     </Center>
     
     <Box p={4}>
