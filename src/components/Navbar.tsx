@@ -24,7 +24,7 @@ import { useRouter } from 'next/navigation'
 import axios from 'axios'
 import Link from 'next/link'
 import Image from 'next/image'
-import logo from '@/helpers/logo.png'
+import logo from '@/assets/logo.png'
 interface Props {
   children: React.ReactNode
 }

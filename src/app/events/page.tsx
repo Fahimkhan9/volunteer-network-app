@@ -1,7 +1,7 @@
 'use client'
 import EventCard from '@/components/EventCard'
 import SearchEventForm from '@/components/SearchEventForm'
-import { Box, Center, SimpleGrid, Spinner } from '@chakra-ui/react'
+import { Box, Center, HStack, SimpleGrid, Spinner } from '@chakra-ui/react'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 
@@ -35,14 +35,17 @@ function Events() {
   return (
     <>
     <Center>
-    {
-        isloading && <Spinner/>
-    }
-   <SearchEventForm
+    <HStack>
+    <SearchEventForm
    setEvents={setEvents}
    setIsloading={setIsloading}
    isLoading={isloading}
    />
+   {
+        isloading && <Spinner/>
+    }
+    </HStack>
+  
     </Center>
     
     <Box p={4}>

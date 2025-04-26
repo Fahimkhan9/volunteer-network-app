@@ -16,7 +16,7 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react'
 import Link from 'next/link'
-import heroimg from '@/helpers/file.svg'
+import heroimg from '@/assets/file.svg'
 import Image from 'next/image'
 export default function Hero() {
   return (

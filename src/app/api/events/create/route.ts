@@ -51,9 +51,9 @@ export async function POST(req: NextRequest) {
 
 
         cloudinary.config({
-            cloud_name: 'dswzdpmqj',
-            api_key: '178898931287881',
-            api_secret: '5yVwUUgNTjAoYk341NVY_kyG9BY'
+            cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+            api_key: process.env.CLOUDINARY_API_KEY,
+            api_secret: process.env.CLOUDINARY_API_SECRET
         });
         // console.log(image);
 

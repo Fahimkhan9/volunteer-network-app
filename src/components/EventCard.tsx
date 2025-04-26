@@ -14,7 +14,7 @@ import Image from 'next/image'
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import img from '@/helpers/heroimg.jpg'
+
 
 
 
