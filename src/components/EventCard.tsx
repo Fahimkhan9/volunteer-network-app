@@ -14,6 +14,7 @@ import Image from 'next/image'
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import Link from 'next/link';
 
 
 
@@ -22,9 +23,7 @@ function EventCard({data,user}) {
   const [isLoading,setIsLoading]=useState(false)
   const [error,setError]=useState('')
   const router=useRouter()
-  console.log(data);
-  console.log(user);
-  
+
   
   const checkExistingRegistered = () => {
     if (data?.participants?.length > 0) {
@@ -57,7 +56,7 @@ function EventCard({data,user}) {
   
   const registerbutton=()=>{
     let isregistered=checkExistingRegistered()
-    console.log(isregistered);
+    
     
     if(!user?._id){
       return <Box fontSize="2xl" color={'gray.800'}>
@@ -65,7 +64,8 @@ function EventCard({data,user}) {
     </Box>
     }else if(data?.ownerId == user?._id){
       return <Box fontSize="2xl" color={'gray.800'}>
-      See Profile
+        <Link href='/profile'> See Profile</Link>
+     
     </Box>
     }else if(isregistered){
       return <Box fontSize="2xl"  color={'gray.800'}>

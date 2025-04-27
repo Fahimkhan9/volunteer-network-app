@@ -28,7 +28,7 @@ function RegisteredEvent() {
         setIsLoading(false)
 
       } catch (error) {
-        console.log(error);
+      
         // setIsLoading(false)
       }
     }
@@ -37,12 +37,12 @@ function RegisteredEvent() {
   const handledeleteregistration=async (id)=>{
     try {
       const data={id,userid}
-      console.log(data);
+    
       
       const res=await axios.post('/api/events/deleteregistration',data)
       const update=eventsParticipated.filter(i=>i._id !=id)
       SetEventsParticipated(()=>update)
-      console.log(res);
+      
       
     } catch (error) {
       

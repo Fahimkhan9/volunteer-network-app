@@ -29,12 +29,12 @@ export default function EventForm() {
     const router=useRouter()
     const getuser=async ()=>{
         const res=await axios.get('/api/users/me')
-        console.log(res.data);
+       
         return res.data.data
     }
     const onSubmit = async (values) => {
         try {
-            // console.log(values)
+            
             const user=await getuser()
             
             
@@ -61,9 +61,9 @@ export default function EventForm() {
 
 
 
-            // console.log(data);
+           
             const res=await axios.post('/api/events/create',formData)
-            console.log(res);
+        
             router.push('/events')
             
         } catch (error) {

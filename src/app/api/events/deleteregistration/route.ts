@@ -23,11 +23,7 @@ export async function POST(req:NextRequest){
                 }
             }
         })
-        console.log(id,'id');
-        console.log(userid,'userid');
-        
-        console.log(eventres,'eventres');
-        
+       
         return NextResponse.json({data:res})
     } catch (error:any) {
         return NextResponse.json({ error: error.message }, { status: 500 })

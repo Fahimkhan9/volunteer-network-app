@@ -22,7 +22,7 @@ function EventCreatedDetails({params}:any) {
         const res=await axios.post('/api/events/getallregistereduserforanevent',{
           id:params.id
         })
-        console.log(res.data);
+        
         
         setAllregistereduserforanevent(res.data.data.participants)
       } catch (error) {
@@ -31,7 +31,7 @@ function EventCreatedDetails({params}:any) {
     }
     load()
   },[])
-  console.log(allregistereduserforanevent);
+  
   
   return (
     <>

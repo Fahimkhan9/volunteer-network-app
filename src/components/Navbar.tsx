@@ -52,17 +52,17 @@ const NavLink = (props: Props) => {
 
 export default function Navbar() {
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const {user,setUser}=useContext(UserContext)
- 
-  const router=useRouter()
-  const handlelogout=async ()=>{
+  const { user, setUser } = useContext(UserContext)
+
+  const router = useRouter()
+  const handlelogout = async () => {
     try {
       await axios.get('/api/users/logout')
       setUser([])
       router.push('/login')
     } catch (error) {
       console.log(error);
-      
+
     }
   }
   return (
@@ -79,71 +79,71 @@ export default function Navbar() {
           <HStack spacing={8} alignItems={'center'}>
             <Box>
               <Link href='/'>
-              <Image
-      src={logo}
-      width={100}
-      height={100}
-      alt="app logo"
-    />
+                <Image
+                  src={logo}
+                  width={100}
+                  height={100}
+                  alt="app logo"
+                />
               </Link>
-           
-              </Box>
+
+            </Box>
             <HStack as={'nav'} spacing={4} display={{ base: 'none', md: 'flex' }}>
-              
+
               {/* <NavLink> */}
-                <Link href='/events'>Events</Link>
-                {
-                  user?._id && (
-                    <>
+              <Link href='/events'>Events</Link>
+              {
+                user?._id && (
+                  <>
                     <Link href='/create'>Create</Link>
-                    </>
-                  )
-                }
+                  </>
+                )
+              }
               {/* </NavLink> */}
             </HStack>
           </HStack>
           <Flex alignItems={'center'}>
             {
               user?._id ? <Menu>
-              <MenuButton
-                as={Button}
-                rounded={'full'}
-                variant={'link'}
-                cursor={'pointer'}
-                minW={0}
+                <MenuButton
+                  as={Button}
+                  rounded={'full'}
+                  variant={'link'}
+                  cursor={'pointer'}
+                  minW={0}
                 >
-                <Avatar
-                  size={'sm'}
-                  name={user.username}
-                  src={
-                    'https://image.unsplash.com/photo-1493666438817-866a91353ca9?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9'
-                  }
-                />
-              </MenuButton>
-              <MenuList>
-            
-                <MenuItem>{user.email}</MenuItem>
-                <MenuItem>
-                <Link href='/profile' >Profile</Link>
-                </MenuItem>
-                <MenuDivider />
-                <MenuItem>
-                <Button colorScheme='red' onClick={()=>handlelogout()}>Logout</Button>
-                </MenuItem>
-                
-               
-                
-                
-              
-              </MenuList>
-            </Menu>
-            :
-            <Flex alignItems={'center'}>
-              <Button>
+                  <Avatar
+                    size={'sm'}
+                    name={user.username}
+                    src={
+                      'https://image.unsplash.com/photo-1493666438817-866a91353ca9?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9'
+                    }
+                  />
+                </MenuButton>
+                <MenuList>
 
-                <Link href='/login'>Login</Link>
-              </Button>
-              </Flex>
+                  <MenuItem>{user.email}</MenuItem>
+                  <MenuItem>
+                    <Link href='/profile' >Profile</Link>
+                  </MenuItem>
+                  <MenuDivider />
+                  <MenuItem>
+                    <Button colorScheme='red' onClick={() => handlelogout()}>Logout</Button>
+                  </MenuItem>
+
+
+
+
+
+                </MenuList>
+              </Menu>
+                :
+                <Flex alignItems={'center'}>
+                  <Button colorScheme='blue'>
+
+                    <Link href='/login'>Login</Link>
+                  </Button>
+                </Flex>
             }
           </Flex>
         </Flex>
@@ -151,13 +151,13 @@ export default function Navbar() {
         {isOpen ? (
           <Box pb={4} display={{ md: 'none' }}>
             <Stack as={'nav'} spacing={4}>
-            <NavLink key={'events'}>Events</NavLink>
+              <NavLink key={'events'}>Events</NavLink>
             </Stack>
           </Box>
         ) : null}
       </Box>
 
-      
+
     </>
   )
 }

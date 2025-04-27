@@ -25,7 +25,7 @@ export default function SearchEventForm({setEvents,setIsloading,isLoading}) {
         }
         setIsloading(true)
         const res=await axios.post('/api/events/search',data)
-        console.log(res);
+      
         setEvents(res.data.data)
         setIsloading(false)
       } catch (error) {

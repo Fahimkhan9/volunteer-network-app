@@ -42,14 +42,14 @@ export default function UserForm({islogin}) {
                 password:values.password
             }
          const res=await axios.post('/api/users/login',user)
-         console.log(res.data);
+        
          const getuser=await axios.get('/api/users/me')
          setUser(getuser.data.data)
          router.push('/profile')
          
          
-        } catch (error) {
-          console.log(error.response.data);
+        } catch (error:any) {
+          
           setErr(error.response.data)
           toast({
             title: 'Error occured',
@@ -69,12 +69,12 @@ export default function UserForm({islogin}) {
                 password:values.password
             }
            const res=await axios.post('/api/users/signup',user)
-           console.log(res);
+         
            router.push('/login')
            
-          } catch (error) {
+          } catch (error:any) {
             
-            console.log(error.response.data);
+            
           setErr(error.response.data)
           toast({
             title: 'Error occured',
@@ -94,7 +94,7 @@ export default function UserForm({islogin}) {
         }
 
       }
-      console.log(isSubmitting);
+  
       
   return (
     <Flex
@@ -173,7 +173,9 @@ export default function UserForm({islogin}) {
                       
                       </Text>
                 }
-                
+                <Text  color={'blue.400'}>
+                 <Link href='/forgotpassword' > Forgot Password?Reset now!</Link>
+                  .</Text>
               </Stack>
               {
                 islogin ? <Button

@@ -27,7 +27,7 @@ export async function POST(req: NextRequest) {
         const image = formData.get('image')
         const owneremail = formData.get('owneremail')
         const ownerId = formData.get('ownerId')
-        // console.log(formData);
+       
 
         // if ([title,
         //     description,
@@ -45,14 +45,13 @@ export async function POST(req: NextRequest) {
         }
         const buffer = Buffer.from(await image.arrayBuffer());
         const filename = Date.now() + image.name.replaceAll(" ", "_");
-        // console.log(filename);
+      
 
         const resfile = await writeFile(
             path.join(process.cwd(), "public/uploads/" + filename),
             buffer
         );
-        console.log(resfile);
-        console.log('d');
+      
 
 
 
@@ -61,13 +60,13 @@ export async function POST(req: NextRequest) {
             api_key: process.env.CLOUDINARY_API_KEY,
             api_secret: process.env.CLOUDINARY_API_SECRET
         });
-        // console.log(image);
+        
 
         const res = await cloudinary.uploader.upload(`${process.cwd()}/public/uploads/${filename}`,{transformation:[
             {width: 300, crop: "scale"},
             {height: 300, crop: "scale"}
         ]})
-        console.log(res);
+       
 
         const event = await Event.create({
             name: title,
@@ -84,8 +83,7 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ msg: 'event created succesfully', data: event })
 
     } catch (error: any) {
-        console.log(error);
-
+       
         return NextResponse.json({ error: error.message }, { status: 500 })
     }
 }

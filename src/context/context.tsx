@@ -11,7 +11,7 @@ export function UserContextProvider({children}){
         const load=async ()=>{
             const res=await axios.get('/api/users/me')
             setUser(res.data.data)
-            console.log('running');
+          
             
         }
         load()

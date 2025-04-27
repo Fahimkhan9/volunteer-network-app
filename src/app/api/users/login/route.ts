@@ -13,7 +13,7 @@ export async function POST(request: NextRequest) {
             return NextResponse.json({ msg: "All fields are required" })
         }
         const user = await User.findOne({ email })
-        // console.log(user);
+        
         
         if (!user) {
             return NextResponse.json({ msg: "Invalid credentials" },{status:400})
@@ -22,7 +22,7 @@ export async function POST(request: NextRequest) {
         if(!validPassword){
             return NextResponse.json({msg: "Invalid password"}, {status: 400})
         }
-        console.log(user);
+      
         
         //create token data
         const tokenData = {

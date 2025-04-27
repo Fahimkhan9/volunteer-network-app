@@ -64,7 +64,7 @@ export default function Hero() {
               bg={'purple'}
               // _hover={{ bg: 'purple.700' }}
               >
-                Events
+                See Events
             </Button>
             </Link>
             

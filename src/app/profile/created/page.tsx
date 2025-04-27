@@ -50,7 +50,7 @@ function CreatedEvent() {
     try {
       const data={id}
       const res=await axios.post('/api/events/deletevent',data)
-      console.log(res);
+    
       let update=eventsCreatedByMe.filter(item=>item?._id!=id)
       setEventsCreatedByMe(()=>update)
       
