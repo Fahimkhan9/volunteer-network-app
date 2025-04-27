@@ -40,7 +40,7 @@ export const sendEmail = async ({ email, emailType, userId }: any) => {
       apiKey: process.env.MAILER_SEND_TOKEN || '',
     });
 
-    const sentFrom = new Sender("MS_oZ1rnk@test-3m5jgroo130gdpyo.mlsender.net", "Fahim from Volunteer Network");
+    const sentFrom = new Sender(process.env.MAILER_EMAIl || 'default@example.com', "Fahim from Volunteer Network");
 
     const recipients = [
       new Recipient(email, email)
