@@ -37,7 +37,7 @@ export const sendEmail = async ({ email, emailType, userId }: any) => {
     // return mailresponse
 
     const mailerSend = new MailerSend({
-      apiKey: process.env.MAILER_SEND_TOKEN,
+      apiKey: process.env.MAILER_SEND_TOKEN || '',
     });
 
     const sentFrom = new Sender("MS_oZ1rnk@test-3m5jgroo130gdpyo.mlsender.net", "Fahim from Volunteer Network");
